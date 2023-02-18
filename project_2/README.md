@@ -16,6 +16,55 @@ test.csv -- this data contains the test data thedel. We will feed this data into
 The resale price data is skewed to the right. To prepare it for a linear regression model, we need to transform it using a logarithmic function. There are many features included in the dataset, so we used a correlation heatmap to identify and remove identical features, such as floor area in square meters and square feet, and the four indicators for the floor level of the flat. We kept only one feature to describe the age of the HDB by choosing between HDB age, year completed, and lease commence date. We removed latitude, longitude, and other amenities as well. To impute missing data for hawker and mall distance, we added zeros, as they can be understood as null values.  
 In the end, we kept the following features for the model: 'town', 'flat_type', 'floor_area_sqm', 'flat_model', 'Transacted_Year', 'Transacted_Month', 'mid', 'hdb_age', 'max_floor_lvl', 'commercial', 'total_dwelling_units', '1room_sold', '2room_sold', '3room_sold', '4room_sold', '5room_sold', 'exec_sold', 'multigen_sold', 'studio_apartment_sold', '1room_rental', '2room_rental', '3room_rental', 'other_room_rental', 'Mall_Within_500m', 'Mall_Within_1km', 'Mall_Within_2km', 'Hawker_Within_500m', 'Hawker_Within_1km', 'Hawker_Within_2km', 'hawker_food_stalls', 'hawker_market_stalls', 'mrt_nearest_distance', 'bus_interchange', 'mrt_interchange', 'bus_stop_nearest_distance', 'pri_sch_nearest_distance', 'pri_sch_name', 'vacancy', 'pri_sch_affiliation', 'sec_sch_nearest_dist', 'sec_sch_name', 'cutoff_point', and 'affiliation'. We identified and transformed numerical and categorical features to make them readable for the linear model."
 
+### Data Dictionary  
+  
+Below is the features that we have selected from the train data for the model to work on. 
+  
+|Feature|Type|Dataset|Description|
+|---|---|---|---|
+|**flat_type**|*int*|train|type of the resale flat unit, e.g. 3 ROOM| 
+|**floor_area_sqm**|*float*|train|floor area of the resale flat unit in square metres| 
+|**flat_model**|*object*|train|HDB model of the resale flat, e.g. Multi Generation| 
+|**Tranc_Year**|*int*|train|year of resale transaction| 
+|**Tranc_Month**|*int*|train|month of resale transaction| 
+|**mid**|*int*|train|middle value of storey_range| 
+|**hdb_age**|*int*|train|number of years from lease_commence_date to present year| 
+|**max_floor_lvl**|*int*|train|highest floor of the resale flat| 
+|**commercial**|*int*|train|boolean value if resale flat has commercial units in the same block| 
+|**total_dwelling_units**|*int*|train|total number of residential dwelling units in the resale flat| 
+|**1room_sold**|*int*|train|number of 1-room residential units in the resale flat| 
+|**2room_sold**|*int*|train|number of 2-room residential units in the resale flat| 
+|**3room_sold**|*int*|train|number of 3-room residential units in the resale flat| 
+|**4room_sold**|*int*|train|number of 4-room residential units in the resale flat| 
+|**5room_sold**|*int*|train|number of 5-room residential units in the resale flat| 
+|**exec_sold**|*int*|train|number of executive type residential units in the resale flat block| 
+|**multigen_sold**|*int*|train|number of multi-generational type residential units in the resale flat block| 
+|**studio_apartment_sold**|*int*|train| number of studio apartment type residential units in the resale flat block| 
+|**1room_rental**|*int*|train|number of 1-room rental residential units in the resale flat block| 
+|**2room_rental**|*int*|train|number of 2-room rental residential units in the resale flat block| 
+|**3room_rental**|*int*|train|number of 3-room rental residential units in the resale flat block| 
+|**other_room_rental**|*int*|train|number of "other" type rental residential units in the resale flat block| 
+|**Mall_Within_500m**|*float*|train|number of malls within 500 metres| 
+|**Mall_Within_1km**|*float*|train|number of malls within 1 kilometre| 
+|**Mall_Within_2km**|*float*|train|number of malls within 2 kilometres| 
+|**Hawker_Within_500m**|*float*|train| number of hawker centres within 500 metres| 
+|**Hawker_Within_1km**|*float*|train|number of hawker centres within 1 kilometre| 
+|**Hawker_Within_2km**|*float*|train|number of hawker centres within 2 kilometres| 
+|**hawker_food_stalls**|*int*|train|number of hawker food stalls in the nearest hawker centre| 
+|**hawker_market_stalls**|*int*|train|number of hawker and market stalls in the nearest hawker centre| 
+|**mrt_nearest_distance**|*float*|train|distance (in metres) to the nearest MRT station| 
+|**bus_interchange**|*int*|train|boolean value if the nearest MRT station is also a bus interchange| 
+|**mrt_interchange**|*int*|train|boolean value if the nearest MRT station is a train interchange station| 
+|**bus_stop_nearest_distance**|*float*|train|distance (in metres) to the nearest bus stop| 
+|**pri_sch_nearest_distance**|*float*|train|distance (in metres) to the nearest primary school| 
+|**pri_sch_name**|*int*|object|name of the nearest primary school| 
+|**vacancy**|*int*|train|number of vacancies in the nearest primary school| 
+|**pri_sch_affiliation**|*int*|train|boolean value if the nearest primary school has a secondary school affiliation| 
+|**sec_sch_nearest_dist**|*float*|train|distance (in metres) to the nearest secondary school| 
+|**sec_sch_name**|*object*|train|name of the nearest secondary school| 
+|**cutoff_point**|*int*|train| PSLE cutoff point of the nearest secondary school| 
+|**affiliation**|*int*|train|boolean value if the nearest secondary school has an primary school affiliation|
+
 ### Modeling
 Before building a model, it's important to establish a baseline for metrics such as mean absolute error (MAE), mean squared error (MSE), and coefficient of determination (R2). These baselines serve as a reference point for evaluating the performance of the models we build.
 
