@@ -57,7 +57,7 @@ Below is the features that we have selected from the train data for the model to
 |**mrt_interchange**|*int*|train|boolean value if the nearest MRT station is a train interchange station| 
 |**bus_stop_nearest_distance**|*float*|train|distance (in metres) to the nearest bus stop| 
 |**pri_sch_nearest_distance**|*float*|train|distance (in metres) to the nearest primary school| 
-|**pri_sch_name**|*int*|object|name of the nearest primary school| 
+|**pri_sch_name**|*object*|train|name of the nearest primary school| 
 |**vacancy**|*int*|train|number of vacancies in the nearest primary school| 
 |**pri_sch_affiliation**|*int*|train|boolean value if the nearest primary school has a secondary school affiliation| 
 |**sec_sch_nearest_dist**|*float*|train|distance (in metres) to the nearest secondary school| 
