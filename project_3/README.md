@@ -1,178 +1,78 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 3: Web APIs & NLP
+# Project 3: Web APIs & NLP
 
-### Description
+### Executive Summary
+Trip.com Group Limited is a leading global one-stop travel platform, integrating a comprehensive suite of travel products and services and differentiated travel content.
 
-In week four we've learned about a few different classifiers. In week five we'll learn about webscraping, APIs, and Natural Language Processing (NLP). This project will put those skills to the test.
+The Company provides one-stop travel services through Ctrip and Qunar:
 
-For project 3, your goal is two-fold:
-1. You'll collect posts from two subreddits of your choosing. You can use [Pushshift's](https://github.com/pushshift/api) API or any other low-code platform for the same. 
-Alternatively, you can web-scrape or use any low-code platform, eg., parse-hub, collect data from twitter, wiki, facebook, insta etc.
-1. You'll then use NLP to train a classifier on which subreddit (or other sub-sections based on the site you choose to scrape your data from) a given post came from. This is a binary classification problem.
+Our accommodation business provides over 1.2 million global accommodation offerings, covering hotels, motels, resorts, homes, apartments, bed and breakfasts, hostels, and other properties.
+Our air ticketing business offers flights from over 480 airlines, covering over 2,600 airports in over 200 countries and regions.
+We also offer over 310,000 in-destination activities around the world.
+The Company provides travel services to non-Chinese customers mainly through Trip.com and Skyscanner.
 
+The goal is to penetrate America especially North America and we plan to use be more visible on search engine thus marketing started keyword research. Keyword research is the process of finding and analyzing search terms that people enter into search engines with the goal of using that data for a specific purpose, often for search engine optimization (SEO) or general marketing. Keyword research can uncover queries to target, the popularity of these queries, their ranking difficulty, and more. In order to do so, we will need to identify keys words especially long-tail keywords that can get to the customers. 
 
-### Requirements
+Text classification gives you a richer SEO audit of the words that characterize your page content. Exploring word frequency against content in multiple pages will lead to more decisive SEO insights into inserting the words meant to be emphasized in a search query.
 
-- Gather and prepare your data using the `requests` library.
-- **Create and compare two models**. One of these must be a Naive Bayes classifier, however the other can be a classifier of your choosing: logistic regression, KNN, SVM, etc.
-- A Jupyter Notebook with your analysis for a peer audience of data scientists.
-- An executive summary of your results.
-- A short presentation outlining your process and findings for a semi-technical audience.
+### Problem statement
+Do a Keyword research to uncover queries to target and the popularity of these queries.
 
-**Pro Tip:** You can find a good example executive summary [here](https://www.proposify.biz/blog/executive-summary).
-
----
-
-### Necessary Deliverables / Submission
-
-- Code must be in at least one clearly commented Jupyter Notebook.
-- A readme/executive summary in markdown.
-- You must submit your slide deck as a PDF.
-- Materials must be submitted by the specified date given by the Instructional Team through your GitHub account repo shared with the Instructional Team.
-
----
-
-## Presentation Structure
-
-- **Presentation Time: 10 minutes**
-- Presentations will a 10 minute presentation. You can use inspiration from the [ignite talks](http://www.ignitetalks.io/) framework to design your presentation (its fun!). Learn more about the [ignite style](https://speakingaboutpresenting.com/content/fast-ignite-presentation/) 
-- Use Google Slides or some other visual aid (Keynote, Powerpoint, etc).
-- Consider the audience. Assume you are presenting to a non-technical audience.
-- Start with the **data science problem**.
-- Use visuals that are appropriately scaled and interpretable.
-- Talk about your procedure/methodology (high level, **CODE IS ALWAYS INAPPROPRIATE FOR A NON-TECHNICAL AUDIENCE**).
-- Talk about your primary findings.
-- Make sure you provide **clear recommendations** that follow logically from your analyses and narrative and answer your data science problem.
+### Methodology
+In this project, we will be using Reddit to pull from r/Flights and r/Hotels 5000 entrys each to build a text classification model to help the marketing team identify which word should be for flight domain and which word should be for hotel domain. The model will also help to identify the top few words with high coeficient to help the marketing team see if we can identify long-tail keywords.
+![r_flights](images/r_flights.png)
+![r_hotels](images/r_hotel.png)
 
 
-Be sure to rehearse and time your presentation before class.
+### Brief summary of your analysis
+We will do data cleaning to remove the duplciate and null and combine both textand title together. 
 
----
+in the EDA and preprocessing, we remove non-english words and we use wordclouds to visualise the top 25 words before stopwords and visualise the top 25words without stopwords
 
-## Rubric
-Teaching team will evaluate your project using the following criteria.  You should make sure that you consider and/or follow most if not all of the considerations/recommendations outlined below **while** working through your project.
+For Flights 25 most frequent words withstopwords
+![flight withstopword](images/df_flight_top25.jpg)
+For Hotels 25 most frequent words withstopwords
+![hotel_withstopword](images/df_hotels_top25.jpg)
 
-**Note:** Presentation will be done as a group while codes will be prepared and submitted by each student.
-
-For Project 3 the evaluation categories are as follows:<br>
-**The Data Science Process**
-- Problem Statement
-- Data Collection
-- Data Cleaning & EDA
-- Preprocessing & Modeling
-- Evaluation and Conceptual Understanding
-- Conclusion and Recommendations
-
-**Organization and Professionalism**
-- Organization
-- Visualizations
-- Python Syntax and Control Flow
-- Presentation
-
-**Scores will be out of 30 points based on the 10 categories in the rubric.** <br>
-*3 points per section*<br>
-
-| Score | Interpretation |
-| --- | --- |
-| **0** | *Project fails to meet the minimum requirements for this item.* |
-| **1** | *Project meets the minimum requirements for this item, but falls significantly short of portfolio-ready expectations.* |
-| **2** | *Project exceeds the minimum requirements for this item, but falls short of portfolio-ready expectations.* |
-| **3** | *Project meets or exceeds portfolio-ready expectations; demonstrates a thorough understanding of every outlined consideration.* |
+After removing stop words for Flights, 25 most frequent words
+![flight withoutstopword](images/flightss.jpg)
+After removing stop words for Hotels, 25 most frequent words
+![hotel_withoutstopword](images/hotelss.jpg)
 
 
-### The Data Science Process
+After doing count vectorizer this are the new 20 words which we can use to queries to Flights or Hotels 
+![common20words](images/common20words.jpg)
 
-**Problem Statement**
-- Is it clear what the goal of the project is?
-- What type of model will be developed?
-- How will success be evaluated?
-- Is the scope of the project appropriate?
-- Is it clear who cares about this or why this is important to investigate?
-- Does the student consider the audience and the primary and secondary stakeholders?
+After which we Tokenize Lemmatize our data. Tokenization is the process of breaking a sequence of text into smaller units called tokens. In natural language processing, tokens are usually words or subwords that are used to represent the text data. Lemmatizing is the process of reducing a word to its base or root form, which is called the lemma. In linguistics, a lemma is the canonical form of a word, which represents its core meaning. For example, the lemma of the word "running" is "run", and the lemma of the word "better" is "good".
 
-**Data Collection**
-- Was enough data gathered to generate a significant result?
-- Was data collected that was useful and relevant to the project?
-- Was data collection and storage optimized through custom functions, pipelines, and/or automation?
-- Was thought given to the server receiving the requests such as considering number of requests per second?
+### Modeling
+We train test fit with the below attributes
+test_size = .3,  # 70% train 30% test
+shuffle = True, # shuffles data prior to splitting
+stratify = y, # distribution of classes across train and test
+random_state = 3)# ensures same split each time to allow repeatability
 
-**Data Cleaning and EDA**
-- Are missing values imputed/handled appropriately?
-- Are distributions examined and described?
-- Are outliers identified and addressed?
-- Are appropriate summary statistics provided?
-- Are steps taken during data cleaning and EDA framed appropriately?
-- Does the student address whether or not they are likely to be able to answer their problem statement with the provided data given what they've discovered during EDA?
+We use the below  models to run and check on our test accuracy and below are the results.   
+RandomForestClassifier,  
+DecisionTreeClassifier,  
+LogisticRegression,  
+MultinomialN,  
+KNeighborsClassifie
 
-**Preprocessing and Modeling**
-- Is text data successfully converted to a matrix representation?
-- Are methods such as stop words, stemming, and lemmatization explored?
-- Does the student properly split and/or sample the data for validation/training purposes?
-- Does the student test and evaluate a variety of models to identify a production algorithm (**AT MINIMUM:** Random Forest and one other model)?
-- Does the student defend their choice of production model relevant to the data at hand and the problem?
-- Does the student explain how the model works and evaluate its performance successes/downfalls?
-
-**Evaluation and Conceptual Understanding**
-- Does the student accurately identify and explain the baseline score?
-- Does the student select and use metrics relevant to the problem objective?
-- Does the student interpret the results of their model for purposes of inference?
-- Is domain knowledge demonstrated when interpreting results?
-- Does the student provide appropriate interpretation with regards to descriptive and inferential statistics?
-
-**Conclusion and Recommendations**
-- Does the student provide appropriate context to connect individual steps back to the overall project?
-- Is it clear how the final recommendations were reached?
-- Are the conclusions/recommendations clearly stated?
-- Does the conclusion answer the original problem statement?
-- Does the student address how findings of this research can be applied for the benefit of stakeholders?
-- Are future steps to move the project forward identified?
+|model_name| accuracy_score| precision_score |recall_score| f1_score|
+|---|---|---|---|---|
+|LogisticRegression |      0.929048   |     0.928932 |    0.929191   |0.929016  |
+|Multinomial Naive Bayes  |     0.917106   |     0.921325  |   0.915758   |0.916657 
+| Random Forest   |    0.900948    |    0.900827  |   0.901068   |0.900903|
+|  Decsision Tree  |      0.88725   |     0.887405  |   0.887688 |  0.887239 
+| K Nearest Neighbor  |     0.544784   |     0.630084  |   0.555597   |0.475151
 
 
-### Organization and Professionalism
-
-**Project Organization**
-- Are modules imported correctly (using appropriate aliases)?
-- Are data imported/saved using relative paths?
-- Does the README provide a good executive summary of the project?
-- Is markdown formatting used appropriately to structure notebooks?
-- Are there an appropriate amount of comments to support the code?
-- Are files & directories organized correctly?
-- Are there unnecessary files included?
-- Do files and directories have well-structured, appropriate, consistent names?
-
-**Visualizations**
-- Are sufficient visualizations provided?
-- Do plots accurately demonstrate valid relationships?
-- Are plots labeled properly?
-- Are plots interpreted appropriately?
-- Are plots formatted and scaled appropriately for inclusion in a notebook-based technical report?
-
-**Python Syntax and Control Flow**
-- Is care taken to write human readable code?
-- Is the code syntactically correct (no runtime errors)?
-- Does the code generate desired results (logically correct)?
-- Does the code follows general best practices and style guidelines?
-- Are Pandas functions used appropriately?
-- Are `sklearn` and `NLTK` methods used appropriately?
-
-**Presentation**
-- Is the problem statement clearly presented?
-- Does a strong narrative run through the presentation building toward a final conclusion?
-- Are the conclusions/recommendations clearly stated?
-- Is the level of technicality appropriate for the intended audience?
-- Is the student substantially over or under time?
-- Does the student appropriately pace their presentation?
-- Does the student deliver their message with clarity and volume?
-- Are appropriate visualizations generated for the intended audience?
-- Are visualizations necessary and useful for supporting conclusions/explaining findings?
 
 
----
+### Conclusions/recommendations
 
-### Why did we choose this project for you?
-This project covers three of the biggest concepts we cover in the class: Classification Modeling, Natural Language Processing and Data Wrangling/Acquisition.
+Through the model evalutation, we can see that Logistic Regression is the best score and it seems to be quite high in precision at around 92%. All other models are achieving around the same results indicting its not over train with the train data. Only K Nearest Neighbour perform poorly compared to the others. 
 
-Part 1 of the project focuses on **Data wrangling/gathering/acquisition**. This is a very important skill as not all the data you will need will be in clean CSVs or a single table in SQL.  There is a good chance that wherever you land you will have to gather some data from some unstructured/semi-structured sources; when possible, requesting information from an API, but often scraping it because they don't have an API (or it's terribly documented).
+Generally the marketing team can use the 20 words shared to find on the words to use for the SEO strategy as it seems that the logistic regression model had performed well. 
 
-Part 2 of the project focuses on **Natural Language Processing** and converting standard text data (like Titles and Comments) into a format that allows us to analyze it and use it in modeling.
-
-Part 3 of the project focuses on **Classification Modeling**.  Given that project 2 was a regression focused problem, we needed to give you a classification focused problem to practice the various models, means of assessment and preprocessing associated with classification.   
+![common20words](images/common20words.jpg)
