@@ -73,6 +73,8 @@ KNeighborsClassifie
 
 Through the model evalutation, we can see that Logistic Regression is the best score and it seems to be quite high in precision at around 92%. All other models are achieving around the same results indicting its not over train with the train data. Only K Nearest Neighbour perform poorly compared to the others. 
 
+Additional to work on for future is to present the false positive and false negative and to analysis what could have went wrong with it so that we can further improve the model. And also to call the feature selection out on the linear regression model so that we can see the correalted key words with the weighted average information. 
+
 Generally the marketing team can use the 20 words shared to find on the words to use for the SEO strategy as it seems that the logistic regression model had performed well. 
 
 ![common20words](images/common20words.jpg)
